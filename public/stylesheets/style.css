@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1a1a2e; /* Dark blue background for a dark theme */
+    color: #ffffff; /* White text for visibility */
+}
+
+h1 {
+    text-align: center;
+    margin: 20px;
+    color: #ffffff;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px); /* Full viewport height minus header */
+    padding: 10px;
+}
+
+.chessboard {
+    display: grid;
+    grid-template-columns: repeat(8, 60px); /* 8 columns with square size 60px */
+    grid-template-rows: repeat(8, 60px); /* 8 rows with square size 60px */
+    border: 4px solid #ffffff; /* Chessboard border */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Subtle glowing effect */
+}
+
+.square {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    position: relative; /* Allows for stacking pieces */
+}
+
+.square.light {
+    background-color: #dcdcdc; /* Light grey square color */
+}
+
+.square.dark {
+    background-color: #2b2e4a; /* Dark blue square color */
+}
+
+.piece {
+    font-size: 30px;
+    font-weight: bold;
+    user-select: none;
+    cursor: grab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.piece.white {
+    color: #ffffff; /* White piece color */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
+
+.piece.black {
+    color: #000000; /* Black piece color */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%; /* Rounded background for black pieces */
+}
+
+.piece:active {
+    cursor: grabbing;
+    transform: scale(1.1); /* Zoom-in effect when dragging */
+    transition: transform 0.1s ease-in-out;
+}
+
+/* Glow effect when dragging over a valid square */
+.square:hover {
+    outline: 2px solid rgba(255, 255, 0, 0.6);
+}
+
+/* Flipping the chessboard for black's perspective */
+.chessboard.flipped {
+    transform: rotate(180deg); /* Rotate the entire board */
+}
+
+/* Correcting square rotation inside the flipped board */
+.chessboard.flipped .square {
+    transform: rotate(180deg); /* Keep squares and pieces upright */
+}
+
+/* Smooth flipping animation */
+.chessboard {
+    transition: transform 0.5s ease-in-out;
+}
