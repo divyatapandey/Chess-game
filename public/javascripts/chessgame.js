@@ -6,6 +6,10 @@ let draggedPiece=null;
 let sourceSquare= null;
 let playerRole=null;
 
+// Prompt for the player's name
+const playerName = prompt("Enter your name:");
+socket.emit("setPlayerName", playerName);
+
 const renderBoard=()=>
 {
     const board= chess.board();
@@ -106,8 +110,19 @@ k : "♔" // White King
 };
 
 socket.on("playerRole",function(role){
-    playerRole=role,
+    playerRole=role;
+    if (role === "w") {
+        alert("You are the White Player.");
+    } else if (role === "b") {
+        alert("You are the Black Player.");
+    } else {
+        alert("You are a Spectator.");
+    }
     renderBoard();
+});
+
+socket.on("playerJoined", ({ name, role }) => {
+    alert(`${name} has joined as ${role}.`);
 });
 
 socket.on("spectatorRule",function(){
@@ -124,6 +139,17 @@ socket.on("move",function(move){
     chess.load(move);
     renderBoard();
 });
+
+
+socket.on("gameOver", (message) => {
+    alert(message); // Display game result
+});
+
+socket.on("playerDisconnected", (message) => {
+   // console.log("Message received:", message); // Check if it's logged
+    alert(message); 
+});
+
 
 renderBoard();
 
