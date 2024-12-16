@@ -152,11 +152,18 @@ uniquesocket.on("disconnect", () => {
     } else if (uniquesocket.id === players.black) {
         delete players.black;
     }
+    
+    // Check if both players have disconnected
+    if (!players.white && !players.black) {
+        chess.reset(); // Reset the chess game
+        io.emit('boardState', chess.fen()); // Send the reset board state to all players
+        io.emit('gameOver', 'Game restarted! Both players disconnected.'); // Notify about game restart
+    } else {
+        io.emit("playerDisconnected", `${playerNames[uniquesocket.id] || 'A player'} disconnected`);
+    }
+
     console.log(`${playerNames[uniquesocket.id] || 'A player'} disconnected`);
-    let pname= playerNames[uniquesocket.id];
-    delete playerNames[uniquesocket.id];
-    io.emit("playerDisconnected", `${pname || 'A player'} disconnected`);
-  
+    delete playerNames[uniquesocket.id]; // Remove the player from the playerNames object
 });
 
 });

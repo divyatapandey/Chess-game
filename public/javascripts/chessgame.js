@@ -142,7 +142,9 @@ socket.on("move",function(move){
 
 
 socket.on("gameOver", (message) => {
+    chess.reset(); 
     alert(message); // Display game result
+    renderBoard();
 });
 
 socket.on("playerDisconnected", (message) => {

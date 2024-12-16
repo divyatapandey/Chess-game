@@ -5,11 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
-    "start":"npx nodemon app.js"
-=======
     "start":"node app.js"
->>>>>>> 1222ca3f7f99d2a86ca5a75c88d61f026691fcbe
   },
   "keywords": [],
   "author": "",
